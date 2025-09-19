@@ -347,14 +347,14 @@ function addComments(){
   let comments=[];
   switch(current+1){
     case 2: comments=[{text:"ownn que fofo", className:"neto"},{text:"É um dia especial pra mim, foi a primeira vez que saímos quando vc voltou❤️", className:"jhully"}]; break;
-    case 3: comments=[{text:"Sem comentarios eu ainda era um personagem secreto", className:"neto"},{text:"Época boa em que eu cuidava da gabriela bêbada", className:"jhully"}]; break;
+    case 3: comments=[{text:"Sem comentarios eu ainda era um personagem secreto", className:"neto"},{text:"Época boa q a gnt não conhecia o trio", className:"jhully"}]; break;
     case 4: comments=[{text:"O tudo juntas n era brincadeira", className:"neto"},{text:"Duas traumatizadas em ação", className:"jhully"}]; break;
     case 5: comments=[{text:"E a partir desse dia o Livro começa", className:"neto"},{text:"Quando o rogerio ainda era legal aff", className:"jhully"}]; break;
     case 6: comments=[{text:"Meu primeiro beijo", className:"neto"},{text:"Ai queria ter ficado mais", className:"jhully"}]; break;
     case 7: comments=[{text:"Minha filha sabia que o rogerio também fez questão de ir arrumar um pra ti KKKKKK", className:"neto"},{text:"SE MATA", className:"jhully"}]; break;
     case 8: comments=[{text:"110 reais nesse pano de chão acredita nisso", className:"neto"},{text:"Emocionado do krl", className:"jhully"}]; break;
-    case 9: comments=[{text:"Eu chamo esse dia de a A Provação do Ateu! 😎", className:"neto"},{text:"", className:"jhully"}]; break;
-    case 11: comments=[{text:"Blz, eu amo essa foto", className:"neto"},{text:"Aquele dia aqueceu meu coração ❤️", className:"jhully"}]; break;
+    case 9: comments=[{text:"Eu chamo esse dia de a A Provação do Ateu! 😎", className:"neto"},{text:"Nunca vi ir pra igreja e sair cheia de desgraça q nem eu nesse dia", className:"jhully"}]; break;
+    case 11: comments=[{text:"Blz, eu amo essa foto", className:"neto"},{text:"So não ama mais que eu", className:"jhully"}]; break;
     case 12: comments=[{text:"Surpresa incrível, fiquei emocionado!", className:"neto"},{text:"Nunca vou esquecer esse aniversário especial 💖", className:"jhully"}]; break;
   }
   comments.forEach(c=>{ const div=document.createElement("div"); div.className="comment "+c.className; div.textContent=c.text; commentsDiv.appendChild(div); });
@@ -405,7 +405,7 @@ setInterval(createHeart,500);
 
 // Carrossel
 let slideIndex=0;
-const images=["extra1.jpg","extra2.jpg","extra3.jpg","extra4.jpg","extra5.jpg"];
+const images=["extra1.jpg","extra2.jpg","extra3.jpg","extra4.jpg","extra5.jpg","extra6.jpg","extra7.jpg","extra8.jpg","extra9.jpg","extra10.jpg","extra11.jpg","extra12.jpg","extra12.jpg","extra14.jpg","extra15.jpg"];
 const carouselImage=document.getElementById("carouselImage");
 function showSlide(){
   carouselImage.classList.remove("fade");
