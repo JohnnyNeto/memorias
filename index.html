@@ -94,6 +94,24 @@
   .comment { padding:6px 10px; border-radius:12px; font-size:14px; max-width:90%; text-align:left; animation: fadeIn 0.5s ease forwards; }
   .neto { background:#cce0ff; color:#004a99; align-self:flex-start; }
   .jhully { background:#ffcce0; color:#99004d; align-self:flex-end; }
+.rebeca {
+  background:#e0ccff;   /* lilás claro */
+  color:#8000ff;        /* roxo vivo */
+  align-self:flex-start;
+}
+
+.rogerio {
+  background:#cfd6e0;   /* cinza azulado */
+  color:#001f3f;        /* azul escuro quase preto */
+  align-self:flex-start;
+}
+
+.carioca {
+  background:#1eff83;   /* cinza azulado */
+  color:#0e741f;        /* azul escuro quase preto */
+  align-self:flex-start;
+}
+
 
   #specialMessage { display:none; text-align:center; padding:20px; animation: fadeIn 2s ease forwards; }
   #specialMessage h2 { color:#d63384; font-size:26px; animation: blink 1s infinite; }
@@ -141,6 +159,8 @@
 💬 **Quem comenta:**<br>
 <span style="color:#004a99; font-weight:bold;">💙 Neto:</span> comentários do Neto aparecem em azul.<br>
 <span style="color:#99004d; font-weight:bold;">💖 Jhully:</span> comentários da Jhully aparecem em rosa.<br><br>
+<span style="color:#8000ff; font-weight:bold;">💜 Rebeca:</span> comentários do Neto aparecem em roxo.<br>
+<span style="color:#001f3f; font-weight:bold;">🖤 Rogerio:</span> comentários do Rogerio aparecem em uma especie de azul preto.<br><br>
 Esperamos que se divirta e relembre cada risada, cada abraço e cada momento inesquecível! 🥰✨.
   </p>
   <button class="next" onclick="nextCard()">Entendi! Vamos começar 💕</button>
@@ -163,6 +183,10 @@ Esperamos que se divirta e relembre cada risada, cada abraço e cada momento ine
 <div class="card">
   <h2>💌 </h2>
   <p class="desc">Ta bom admito essa pergunta foi podre, Vou mudar a dinamica pq me deu vontade. Aproveiteeee!</p>
+   <div class="comments" style="display:flex; flex-direction:column; gap:6px; margin-top:10px;">
+    <div class="comment rebeca">💜 Rebeca: Dois burros q n sabem nem o nome da pobre criança, o nome dele é Afonso</div>
+  </div>
+  <p class="desc">????Mas que prr, Minha filha aq é meu espaço pessoal só EU falo nele! sai sai sai</p>
   <button class="next" onclick="nextCard()">Seguir 💕</button>
 </div>
 
@@ -346,15 +370,15 @@ function addComments(){
   commentsDiv.style.display="flex"; commentsDiv.innerHTML="";
   let comments=[];
   switch(current+1){
-    case 2: comments=[{text:"ownn que fofo", className:"neto"},{text:"É um dia especial pra mim, foi a primeira vez que saímos quando vc voltou❤️", className:"jhully"}]; break;
-    case 3: comments=[{text:"Sem comentarios eu ainda era um personagem secreto", className:"neto"},{text:"Época boa q a gnt não conhecia o trio", className:"jhully"}]; break;
+    case 2: comments=[{text:"ownn que fofo", className:"neto"},{text:"É um dia especial pra mim, foi a primeira vez que saímos quando vc voltou❤️", className:"jhully"},{text:"Eu n fui, mas lembro q comemoramos na facul e ali foi o inicio da nossa amizade", className:"rebeca"},{text:"e oq isso tem haver com essa memoria...", className:"rogerio"},{text:"KKKKKKKKKK", className:"neto"}]; break;
+    case 3: comments=[{text:"Sem comentarios eu ainda era um personagem secreto", className:"neto"},{text:"Época boa q a gnt não conhecia o trio", className:"jhully"},{text:"Dia FODAAA, todo mundo se perdeu, mas amo lembrar dessa nossa primeira festa", className:"rebeca"}]; break;
     case 4: comments=[{text:"O tudo juntas n era brincadeira", className:"neto"},{text:"Duas traumatizadas em ação", className:"jhully"}]; break;
-    case 5: comments=[{text:"E a partir desse dia o Livro começa", className:"neto"},{text:"Quando o rogerio ainda era legal aff", className:"jhully"}]; break;
-    case 6: comments=[{text:"Meu primeiro beijo", className:"neto"},{text:"Ai queria ter ficado mais", className:"jhully"}]; break;
-    case 7: comments=[{text:"Minha filha sabia que o rogerio também fez questão de ir arrumar um pra ti KKKKKK", className:"neto"},{text:"SE MATA", className:"jhully"}]; break;
-    case 8: comments=[{text:"110 reais nesse pano de chão acredita nisso", className:"neto"},{text:"Emocionado do krl", className:"jhully"}]; break;
+    case 5: comments=[{text:"E a partir desse dia o Livro começa", className:"neto"},{text:"Quando o rogerio ainda era legal aff", className:"jhully"},{text:"NOSSA PRIMEIRA VEZ NA BACCO AAAA", className:"rebeca"},{text:"vou botar elas pra tomar o copão de jack maçã verde", className:"neto"}]; break;
+    case 6: comments=[{text:"Meu primeiro beijo", className:"neto"},{text:"Ai queria ter ficado mais", className:"jhully"},{text:"Se eu soubesse que ia ficar de vela, não tinha nem ido", className:"rebeca"},{text:"Tinha o Carioca filha", className:"rogerio"},{text:"VTF BIXO", className:"carioca"},{text:"KKKKKKK", className:"neto"}]; break;
+    case 7: comments=[{text:"Minha filha sabia que o rogerio também fez questão de ir arrumar um pra ti KKKKKK", className:"neto"},{text:"Fiquei chocada com essa noticia da camisa", className:"rebeca"}]; break;
+    case 8: comments=[{text:"110 reais nesse pano de chão acredita nisso", className:"neto"},{text:"Emocionado do krl", className:"jhully"},{text:"Emocionado do krl", className:"jhully"}]; break;
     case 9: comments=[{text:"Eu chamo esse dia de a A Provação do Ateu! 😎", className:"neto"},{text:"Nunca vi ir pra igreja e sair cheia de desgraça q nem eu nesse dia", className:"jhully"}]; break;
-    case 11: comments=[{text:"Blz, eu amo essa foto", className:"neto"},{text:"So não ama mais que eu", className:"jhully"}]; break;
+    case 11: comments=[{text:"Blz, eu amo essa foto", className:"neto"},{text:"So não ama mais que eu", className:"jhully"},{text:"Eu que tirei essa foto linda, orgulho dms da minha gabibis", className:"rebeca"}]; break;
     case 12: comments=[{text:"Surpresa incrível, fiquei emocionado!", className:"neto"},{text:"Nunca vou esquecer esse aniversário especial 💖", className:"jhully"}]; break;
   }
   comments.forEach(c=>{ const div=document.createElement("div"); div.className="comment "+c.className; div.textContent=c.text; commentsDiv.appendChild(div); });
