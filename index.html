@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Álbum de Memórias 💖</title>
+<style>
+  body { margin:0; font-family: "Poppins", sans-serif; background: linear-gradient(180deg, #ffd6e8, #fff0f6); display:flex; justify-content:center; align-items:center; min-height:100vh; color:#4a2c2a; overflow:hidden; position:relative; }
+  .start-screen { position:fixed; top:0; left:0; width:100%; height:100%; background: linear-gradient(180deg, #ffd6e8, #fff0f6); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; z-index:10; }
+  .start-screen h1 { color:#d63384; font-size:26px; margin-bottom:20px; }
+  .start-screen button { background:#d63384; color:white; border:none; padding:14px 22px; border-radius:14px; font-size:18px; cursor:pointer; transition:.2s; }
+  .start-screen button:hover { background:#b82c6f; transform:scale(1.05); }
+
+  .hearts { position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; z-index:0; }
+  .heart { position:absolute; bottom:-20px; font-size:20px; animation: rise linear infinite; opacity:0.8; filter: drop-shadow(0 0 6px #fff); }
+  @keyframes rise {0% { transform: translateY(0) rotate(0deg); opacity:0.8; } 50% { transform: translateY(-50vh) rotate(180deg); opacity:1; } 100% { transform: translateY(-110vh) rotate(360deg); opacity:0; } }
+
+  .card { background:#fff; border-radius:20px; box-shadow:0 6px 18px rgba(0,0,0,0.12); padding:20px; max-width:420px; width:90%; text-align:center; display:none; flex-direction:column; gap:14px; z-index:1; }
+  .card.active { display:flex; }
+  .card h2 { color:#d63384; margin:0; font-size:20px; }
+  .card img { width:100%; border-radius:16px; object-fit:cover; max-height:350px; }
+  .desc { font-size:16px; color:#555; line-height:1.4; }
+
+  .options { display:flex; flex-direction:column; gap:10px; }
+  .options button, .next { background:#d63384; color:white; border:none; padding:12px; border-radius:12px; font-size:15px; cursor:pointer; transition:.2s; }
+  .options button:hover, .next:hover { background:#b82c6f; transform:scale(1.04); }
+
+  .comments { margin-top:10px; display:flex; flex-direction:column; gap:6px; }
+  .comment { padding:6px 10px; border-radius:12px; font-size:14px; max-width:90%; text-align:left; animation: fadeIn 0.5s ease forwards; }
+  .neto { background:#cce0ff; color:#004a99; align-self:flex-start; }
+  .jhully { background:#ffcce0; color:#99004d; align-self:flex-end; }
+
+  #specialMessage { display:none; text-align:center; padding:20px; animation: fadeIn 2s ease forwards; }
+  #specialMessage h2 { color:#d63384; font-size:26px; animation: blink 1s infinite; }
+  #specialMessage p { font-size:18px; color:#555; animation: floatText 3s ease-in-out infinite; }
+
+  @keyframes blink {0%, 50%, 100% { opacity:1; } 25%, 75% { opacity:0.4; }}
+  @keyframes floatText {0% { transform: translateY(0); } 50% { transform: translateY(-6px); } 100% { transform: translateY(0); }}
+  @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+  @media (max-width:480px){
+    .card { max-width:95%; padding:16px; }
+    .card img { max-height:300px; }
+    .desc { font-size:15px; }
+    .options button, .next { font-size:15px; padding:12px; }
+    #specialMessage h2 { font-size:22px; }
+    #specialMessage p { font-size:16px; }
+
+    .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+.gallery img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
+}
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+  }
+</style>
+</head>
+<body>
+
+<div class="start-screen" id="startScreen">
+  <h1>💖 Álbum de Memórias 💖</h1>
+  <p>Reviva os momentos especiais 🎶</p>
+  <button onclick="startExperience()">Começar Álbum</button>
+</div>
+
+<div class="hearts"></div>
+
+<!-- Card Explicativo -->
+<div class="card">
+  <h2>✨ Bem-vinda ao Nosso Álbum! 💖</h2>
+  <img src="album.jpg" alt="Explicação do Álbum">
+  <p class="desc">
+    Oi, flor! 🌸 Aqui você vai viajar pelas nossas memórias mais especiais 💕<br><br>
+    🌟 Alguns cards são **quiz**, onde você pode escolher uma opção e ver nossos comentários engraçados ou fofos.<br>
+    🌟 Outros cards são **memórias**, com fotos e mensagens que marcaram nossos momentos juntas.<br>
+    🌟 Clique em "**Próxima memória**" para avançar e se divertir pelos momentos.<br>
+    🌟 Aproveite os corações que flutuam na tela e a música de fundo 🎶💌<br><br>
+    💬 **Quem comenta:**<br>
+    <span style="color:#004a99; font-weight:bold;">💙 Neto:</span> comentários do Neto aparecem em azul.<br>
+    <span style="color:#99004d; font-weight:bold;">💖 Jhully:</span> comentários da Jhully aparecem em rosa.<br><br>
+    Esperamos que se divirta e relembre cada risada, cada abraço e cada momento inesquecível! 🥰✨
+  </p>
+  <button class="next" onclick="nextCard()">Entendi! Vamos começar 💕</button>
+</div>
+
+<!-- Cards 1 a 12 -->
+<div class="card">
+  <h2>Nosso primeiro trabalho juntas</h2>
+  <img src="gabi1.jpg" alt="Primeiro Trabalho">
+  <p class="desc">Quando fizeram 18 anos, decidiram procurar um emprego juntas. Duraram apenas um mês, mas viveram tudo lado a lado: pesado, exaustivo e divertido. Até lembram do menino que era o favorito da Gabi 😂</p>
+  <div class="options">
+    <button onclick="showComment(1,'A')">Antonio</button>
+    <button onclick="showComment(1,'B')">Jose</button>
+  </div>
+  <div class="comments" id="comments-1" style="display:none;"></div>
+  <button class="next" onclick="nextCard()">Próxima memória</button>
+</div>
+
+<!-- Card 1.5 - Palavras do Neto -->
+<div class="card">
+  <h2>💌 </h2>
+  <p class="desc">
+   Ta bom admito essa pergunta foi podre, ja disse que foi culpa da jhullyKKKKKKKK 
+   Enfim a dinamica vai mudar de novo pq deu vontade Aproveiteee
+  </p>
+  <p class="desc">
+    Muito bem muito bem, assim n consigo clicar por ti ent me faz um favor e aperta no botão seguir, vc consegue!  
+  </p>
+
+  <button class="next" onclick="nextCard()">Seguir 💕</button>
+</div>
+
+<div class="card">
+  <h2>O dia do sushi e do trampolim</h2>
+  <img src="gabi2.jpg" alt="Sushi e trampolim">
+  <p class="desc">SEU ANIVERSARIO! e é claro que ia ser no sushi, pena que minha flor esquece que tem cara de nenem e n troca a identidade, quase n come de graça aiaiai. E ainda tem pula pula, nem meus amigos me levaram nessa baitolagem.</p>
+  <div class="comments" id="comments-2"></div>
+  <button class="next" onclick="nextCard()">Próxima memória</button>
+</div>
+
+<div class="card">
+  <h2>Primeira festa juntas</h2>
+  <img src="gabi3.jpg" alt="Primeira festa">
+  <p class="desc">A primeira festa juntas, caramba deve ser muito triste o pre antes de me conhecer, bom aqui eu diria muito copão, pirocada quente, pera a rebeca n ta ent ainda n tinha. mas so vejo potecias alcoolicas ai. Que divertido!🎉✨</p>
+  <div class="comments" id="comments-3"></div>
+  <button class="next" onclick="nextCard()">Próxima memória</button>
+</div>
+
+<div class="card">
+  <h2>Cerimonia do Jaleco</h2>
+  <img src="gabi4.jpg" alt="Parque">
+  <p class="desc">Muitas emoções, o dia em q se torna uma verdadeira meia psicóloga. Um início de um sonho!</p>
+  <div class="comments" id="comments-4"></div>
+  <button class="next" onclick="nextCard()">Próxima memória</button>
+</div>
+
+<div class="card">
+  <h2>Primeiro dia na Bacco</h2>
+  <img src="gabi5.jpg" alt="Filmes">
+  <p class="desc">O dia onde as meninas cruzaram com o trio maravilha, que azar hein a partir dai so tragedia.</p>
+  <div class="comments" id="comments-5"></div>
+  <button class="next" onclick="nextCard()">Próxima memória</button>
+</div>
+
+<!-- Card 1.5 - Palavras do Neto -->
+<div class="card">
+  <h2>💌 </h2>
+  <p class="desc">
+   Esse aqui é o Fofoquinha do por tras das cameras!
+  </p>
+  <p class="desc">
+    Sabia que nesse dia sem ninguem saber, tava eu e a jhully averiguando ambas as nossas pontes, no meio do MC 
+  </p>
+  
+
+  <button class="next" onclick="nextCard()">Seguir 💕</button>
+</div>
+
+<div class="card">
+  <h2>Dia do Churrasco</h2>
+  <img src="gabi6.jpg" alt="Praia">
+  <p class="desc">LEmbranças desse dia, dançar na chuva, churrasco tenebroso, muita alcool, ralhão e começos interessantes e malucos.</p>
+  <div class="comments" id="comments-6"></div>
+  <button class="next" onclick="nextCard()">Próxima memória</button>
+</div>
+
+<div class="card">
+  <h2>Tudo por uma beats vermelha</h2>
+  <img src="gabi7.jpg" alt="Chuva">
+  <p class="desc">A primeira vez que se foi provado a lendaria beats vermelha, é boa mas enjoa. O importante é como essa foi arranjada.(adoro receber os créditos, brigado brigado)</p>
+  <div class="comments" id="comments-7"></div>
+  <button class="next" onclick="nextCard()">Próxima memória</button>
+</div>
+
+<div class="card">
+  <h2>Grife Perreche</h2>
+  <img src="gabi8.jpg" alt="Caminhada">
+  <p class="desc">Presentezinho fuleiro, ja vi melhores. Uma surpresa pra viagem á Parintins.</p>
+  <div class="comments" id="comments-8"></div>
+  <button class="next" onclick="nextCard()">Próxima memória</button>
+</div>
+
+<div class="card">
+  <h2>Festival</h2>
+  <img src="gabi9.jpg" alt="Arraial">
+  <p class="desc">Churros, milho, uma fila absurda pra coprar um copinho de batata e um balão de corno azul e vermelho que dia pra uns desdia pra outros.</p>
+  <div class="comments" id="comments-9"></div>
+  <button class="next" onclick="nextCard()">Próxima memória</button>
+</div>
+
+<!-- Card 1.5 - Palavras do Neto -->
+<div class="card">
+  <h2>💌 </h2>
+  <p class="desc">
+   Mais um Fofoquinha do por tras das cameras!
+  </p>
+  <p class="desc">
+    Sabia que nesse dia sem ninguem saber, eu e o rogerio fizemos todo um role pra arranjar aquele cartão coração do correio!
+    Deve estar se perguntando, por onde vai esse cartão... so Deus sabeKKKKKKKKKK
+  </p>
+  
+
+  <button class="next" onclick="nextCard()">Seguir 💕</button>
+</div>
+
+<!-- Card 1.5 - Palavras do Neto -->
+<div class="card">
+  <h2>💌 </h2>
+  <p class="desc">
+   Eu TAVA ANSIOSO POR ESSE, essa memoria sera um quizz!
+  </p>
+  <p class="desc">
+    Vai nos ajudar a saber quem que tem razão, BORA PRA PERGUNTA
+  </p>
+  
+
+  <button class="next" onclick="nextCard()">Seguir 💕</button>
+</div>
+
+
+<div class="card">
+  <h2>Missão impossível: Escolher um Buquê</h2>
+  <img src="gabi10.jpg" alt="Filmes">
+  <p class="desc">Meu irmão, o tanto que demorou pra decidir esse buquê não tá escrito, pois todos eram LINDOS. Mas tinha um que, p*t*, criou uma briga pra decidir e você vai declarar quem tá certo: esse buquê parece ser de casamento ou não? 💐</p>
+  
+
+  
+  <!-- AGORA TEM QUIZ -->
+  <div class="options">
+    <button onclick="showComment(10,'A')">Sim, parece de casamento</button>
+    <button onclick="showComment(10,'B')">Não, é só um buquê normal</button>
+  </div>
+  
+  <div class="comments" id="comments-10" style="display:none;"></div>
+  <button class="next" onclick="nextCard()">Próxima memória</button>
+</div>
+
+
+<div class="card">
+  <h2>Dia de Piquenique</h2>
+  <img src="gabi11.jpg" alt="Chuva">
+  <p class="desc">Uma surpresa atras da outra, como q é possviel fazer tanta coisa num dia so. ☕🌧️</p>
+  <div class="comments" id="comments-11"></div>
+  <button class="next" onclick="nextCard()">Próxima memória</button>
+</div>
+
+<!-- Card 1.5 - Palavras do Neto -->
+<div class="card">
+  <h2>💌 </h2>
+  <p class="desc">
+   "Assim como essas flores, você é a harmonia entre delicadeza e força. Cada detalhe em você é único, cada gesto ilumina, cada sorriso floresce no meu mundo. Que este buquê seja apenas um reflexo do quanto admiro a beleza rara que existe em você"
+  </p>
+  <p class="desc">
+    
+  </p>
+  
+
+  <button class="next" onclick="nextCard()">Seguir 💕</button>
+</div>
+
+
+
+<div class="card">
+  <h2>Aniversário surpresa</h2>
+  <img src="gabi12.jpg" alt="Aniversário">
+  <p class="desc">A surpresa perfeita! Risadas, abraços e momentos que ficarão para sempre na memória. 🎉🎂</p>
+  <div class="comments" id="comments-12"></div>
+  <button class="next" onclick="nextCard()">VER SURPRESA💝</button>
+</div>
+
+<!-- Card 13 - Galeria de Memórias Extras -->
+<!-- Card 13 - Galeria de Memórias Extras -->
+<div class="card">
+  <h2>✨ Nossas Memórias Extras 📸</h2>
+  <p class="desc">Por fim chegamos no final. Cada clique, cada sorriso, cada momento fazem parte dessa história linda! 💕</p>
+
+  <div class="carousel">
+    <img id="carouselImage" src="extra1.jpg" alt="Memória" class="fade">
+  </div>
+
+  <button class="next" onclick="showFinal()">Agora sim, a surpresa 💝</button>
+</div>
+
+<style>
+  .carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* fotos maiores */
+    height: 380px; /* altura fixa pro carrossel */
+    overflow: hidden;
+  }
+
+  .carousel img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ocupa bem o espaço */
+    border-radius: 20px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+    opacity: 0;
+    transform: scale(1.1);
+    transition: opacity 1.2s ease-in-out, transform 2s ease-in-out, filter 1.2s ease-in-out;
+  }
+
+  .carousel img.fade {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1.05) saturate(1.1); /* brilho fofinho */
+  }
+</style>
+
+<script>
+  let slideIndex = 0;
+  const images = [
+    "extra1.jpg","extra2.jpg","extra3.jpg","extra4.jpg","extra5.jpg",
+    "extra6.jpg","extra7.jpg","extra8.jpg","extra9.jpg","extra10.jpg",
+    "extra11.jpg","extra12.jpg","extra13.jpg","extra14.jpg","extra15.jpg"
+  ];
+  const carouselImage = document.getElementById("carouselImage");
+
+  function showSlide() {
+    carouselImage.classList.remove("fade");
+
+    setTimeout(() => {
+      carouselImage.src = images[slideIndex];
+      carouselImage.classList.add("fade");
+    }, 200);
+
+    slideIndex = (slideIndex + 1) % images.length;
+  }
+
+  setInterval(showSlide, 2000); // passa sozinho a cada 3.5s
+</script>
+
+
+
+
+
+<!-- Surpresa final -->
+<div id="specialMessage">
+  <h2 id="finalTitle"></h2>
+  <p id="finalText"></p>
+</div>
+
+<audio id="bg-music" loop>
+  <source src="musica.mp3.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let current = 0;
+const cards = document.querySelectorAll(".card");
+const music = document.getElementById("bg-music");
+
+function startExperience(){
+  music.volume = 0.4;
+  music.play();
+  document.getElementById("startScreen").style.display = "none";
+  cards[current].classList.add("active");
+  addComments();
+}
+
+function nextCard(){
+  cards[current].classList.remove("active");
+  current++;
+  if(current < cards.length){
+    cards[current].classList.add("active");
+    addComments();
+  }
+}
+
+function addComments(){
+  const commentsDiv = document.getElementById("comments-" + (current+1));
+  if(!commentsDiv) return;
+  commentsDiv.style.display = "flex";
+  commentsDiv.innerHTML = "";
+
+  let comments = [];
+  switch(current+1){
+    case 2: comments = [
+      {text:"ownn que fofo", className:"neto"},
+      {text:"É um dia especial pra mim, foi a primeira vez que saímos quando vc voltou❤️", className:"jhully"}
+    ]; break;
+    case 3: comments = [
+      {text:"Sem comentarios eu ainda era um personagem secreto", className:"neto"},
+      {text:"Época boa em que eu cuidava da gabriela bêbada", className:"jhully"}
+    ]; break;
+    case 4: comments = [
+      {text:"O tudo juntas n era brincadeira", className:"neto"},
+      {text:"Duas traumatizadas em ação", className:"jhully"}
+    ]; break;
+    case 5: comments = [
+      {text:"E a partir desse dia o Livro começa", className:"neto"},
+      {text:"Quando o rogerio ainda era legal aff", className:"jhully"}
+    ]; break;
+    case 6: comments = [
+      {text:"Meu primeiro beijo", className:"neto"},
+      {text:"Ai queria ter ficado mais", className:"jhully"}
+    ]; break;
+    case 7: comments = [
+      {text:"Minha filha sabia que o rogerio também fez questão de ir arrumar um pra ti KKKKKK", className:"neto"},
+      {text:"SE MATA", className:"jhully"}
+    ]; break;
+    case 8: comments = [
+      {text:"110 reais nesse pano de chão acredita nisso", className:"neto"},
+      {text:"Emocionado do krl", className:"jhully"}
+    ]; break;
+    case 9: comments = [
+      {text:"Eu chamo esse dia de a A Provação do Ateu! 😎", className:"neto"},
+      {text:"", className:"jhully"}
+    ]; break;
+    
+    case 11: comments = [
+      {text:"Blz, eu amo essa foto", className:"neto"},
+      {text:"Aquele dia aqueceu meu coração ❤️", className:"jhully"}
+    ]; break;
+    case 12: comments = [
+      {text:"Surpresa incrível, fiquei emocionado!", className:"neto"},
+      {text:"Nunca vou esquecer esse aniversário especial 💖", className:"jhully"}
+    ]; break;
+  }
+
+  comments.forEach(c=>{
+    const div = document.createElement("div");
+    div.className = "comment " + c.className;
+    div.textContent = c.text;
+    commentsDiv.appendChild(div);
+  });
+}
+
+// Quiz do card 1 e 10
+function showComment(memoryIndex, option){
+  const commentsDiv = document.getElementById("comments-" + memoryIndex);
+  commentsDiv.style.display = "flex";
+  commentsDiv.innerHTML = "";
+
+  if(memoryIndex===1 && option==='A'){
+    commentsDiv.innerHTML = '<div class="comment neto">💙 Neto: Se não for nenhum desses nomes, a culpa é única e exclusivamente da Jhully</div><div class="comment jhully">💖 Jhully: kkkkkkk vou assumir mesmo</div>';
+  }
+  if(memoryIndex===1 && option==='B'){
+    commentsDiv.innerHTML = '<div class="comment neto">💙 Neto: Se não for nenhum desses nomes, a culpa é única e exclusivamente da Jhully</div><div class="comment jhully">💖 Jhully: kkkkkkk vou assumir mesmo</div>';
+  }
+
+  if(memoryIndex===10 && option==='A'){
+    commentsDiv.innerHTML = '<div class="comment neto">💙 Neto: Falei trouxa que parecia</div><div class="comment jhully">💖 Jhully:</div>';
+  }
+  if(memoryIndex===10 && option==='B'){
+    commentsDiv.innerHTML = '<div class="comment neto">💙 Neto:k</div><div class="comment jhully">💖 Jhully:EU FALEIII PRA TI</div>';
+  }
+}
+
+
+function showFinal(){
+  cards[current].classList.remove("active");
+
+  document.getElementById("specialMessage").style.display = "block";
+  const title = "Eu te amo para sempre ❤️";
+  const text = "Obrigado por ser minha melhor lembrança todos os dias. Você é a razão dos meus sorrisos ✨";
+  typeWriter("finalTitle", title, 50, ()=>{ typeWriter("finalText", text, 40); });
+}
+
+function typeWriter(id, message, speed, callback){
+  const element = document.getElementById(id);
+  let i = 0;
+  element.innerHTML = "";
+  function typing(){
+    if(i<message.length){
+      element.innerHTML += message.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    } else if(callback){ callback(); }
+  }
+  typing();
+}
+
+// gerar corações
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random()*100 + "vw";
+  const size = 15+Math.random()*25;
+  heart.style.fontSize = size+"px";
+  heart.style.color = `hsl(${Math.random()*360},100%,75%)`;
+  heart.style.animationDuration = (4+Math.random()*3)+"s";
+  heart.style.opacity = 0.6+Math.random()*0.4;
+  document.querySelector(".hearts").appendChild(heart);
+  setTimeout(()=>heart.remove(),7000);
+}
+setInterval(createHeart,500);
+</script>
+
+</body>
+</html>
