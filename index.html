@@ -312,14 +312,7 @@ Esperamos que se divirta e relembre cada risada, cada abraço e cada momento ine
   <button class="next" onclick="nextCard()">Seguir 💕</button>
 </div>
 
-<!-- Card 12 -->
-<div class="card">
-  <h2>Aniversário surpresa</h2>
-  <img src="gabi12.jpg" alt="Aniversário">
-  <p class="desc">Risadas, abraços e momentos inesquecíveis. 🎉🎂</p>
-  <div class="comments" id="comments-12"></div>
-  <button class="next" onclick="nextCard()">VER SURPRESA 💝</button>
-</div>
+
 
 <!-- Card 13 - Carrossel final -->
 <div class="card">
@@ -447,11 +440,11 @@ function addComments(){
     case 4: comments=[{text:"O tudo juntas n era brincadeira", className:"neto"},{text:"Duas traumatizadas em ação", className:"jhully"}]; break;
     case 5: comments=[{text:"E a partir desse dia o Livro começa", className:"neto"},{text:"Quando o rogerio ainda era legal aff", className:"jhully"},{text:"NOSSA PRIMEIRA VEZ NA BACCO AAAA", className:"rebeca"},{text:"vou botar elas pra tomar o copão de jack maçã verde", className:"neto"}]; break;
     case 6: comments=[{text:"Meu primeiro beijo", className:"neto"},{text:"Ai queria ter ficado mais", className:"jhully"},{text:"Se eu soubesse que ia ficar de vela, não tinha nem ido", className:"rebeca"},{text:"Tinha o Carioca porra", className:"rogerio"},{text:"VTF BIXO", className:"carioca"},{text:"KKKKKKK", className:"neto"}]; break;
-    case 7: comments=[{text:"Minha filha sabia que o rogerio também fez questão de ir arrumar um pra ti KKKKKK", className:"neto"},{text:"Fiquei chocada com essa noticia da camisa", className:"rebeca"}]; break;
-    case 8: comments=[{text:"110 reais nesse pano de chão acredita nisso", className:"neto"},{text:"Emocionado do krl", className:"jhully"}]; break;
+    case 7: comments=[{text:"Minha filha sabia que o rogerio também fez questão de ir arrumar um pra ti KKKKKK", className:"neto"},{text:"SE MATA", className:"hully"}]; break;
+    case 8: comments=[{text:"110 reais nesse pano de chão acredita nisso", className:"neto"},{text:"Emocionado do krl", className:"jhully"},{text:"Fiquei chocada com essa noticia da camisa", className:"rebeca"}]; break;
     case 9: comments=[{text:"Eu chamo esse dia de a A Provação do Ateu! 😎", className:"neto"},{text:"Nunca vi ir pra igreja e sair cheia de desgraça q nem eu nesse dia", className:"jhully"},{text:"Vai pro inferno", className:"rogerio"}]; break;
     case 11: comments=[{text:"Blz, eu amo essa foto", className:"neto"},{text:"So não ama mais que eu", className:"jhully"},{text:"Eu que tirei essa foto linda, orgulho dms da minha gabibis", className:"rebeca"}]; break;
-    case 12: comments=[{text:"Surpresa incrível, fiquei emocionado!", className:"neto"},{text:"Nunca vou esquecer esse aniversário especial 💖", className:"jhully"}]; break;
+    
   }
   comments.forEach(c=>{ const div=document.createElement("div"); div.className="comment "+c.className; div.textContent=c.text; commentsDiv.appendChild(div); });
 }
@@ -461,7 +454,7 @@ function showComment(memoryIndex, option){
   const commentsDiv=document.getElementById("comments-"+memoryIndex);
   commentsDiv.style.display="flex"; commentsDiv.innerHTML="";
   if(memoryIndex===1){
-    commentsDiv.innerHTML='<div class="comment neto">💙 Neto: Se não for nenhum desses nomes, a culpa é da Jhully</div><div class="comment jhully">💖 Jhully: kkkkkkk vou assumir</div>';
+    commentsDiv.innerHTML='<div class="comment neto">💙 Neto: Se não for nenhum desses nomes, a culpa é da Jhully</div><div class="comment jhully">💖 Jhully:</div>';
   }
   if(memoryIndex===10 && option==='A'){
     commentsDiv.innerHTML='<div class="comment neto">💙 Neto: Falei trouxa </div><div class="comment jhully">💖 Jhully:</div>';
