@@ -325,10 +325,36 @@ Esperamos que se divirta e relembre cada risada, cada abraço e cada momento ine
 <div class="card">
   <h2>✨ Nossas Memórias Extras 📸</h2>
   <p class="desc">Por fim chegamos no final. Cada clique, cada sorriso, cada momento fazem parte dessa história linda! 💕</p>
-  <div class="carousel"></p>
+  
   <div class="carousel">
-    <img id="carouselImage" src="extra1.jpg" alt="Memória" class="fade">
-  </div>
+  <img src="extra1.jpg" class="active" alt="Memória extra 1">
+  <img src="extra2.jpg" alt="Memória extra 2">
+  <img src="extra3.jpg" alt="Memória extra 3">
+  <img src="extra4.jpg" alt="Memória extra 4">
+  <img src="extra5.jpg" alt="Memória extra 5">
+  <img src="extra6.jpg" alt="Memória extra 6">
+  <img src="extra7.jpg" alt="Memória extra 7">
+  <img src="extra8.jpg" alt="Memória extra 8">
+  <img src="extra9.jpg" alt="Memória extra 9">
+  <img src="extra10.jpg" alt="Memória extra 10">
+  <img src="extra11.jpg" alt="Memória extra 11">
+  <img src="extra12.jpg" alt="Memória extra 12">
+  <img src="extra13.jpg" alt="Memória extra 13">
+  <img src="extra14.jpg" alt="Memória extra 14">
+  <img src="extra15.jpg" alt="Memória extra 15">
+  <img src="extra16.jpg" alt="Memória extra 16">
+  <img src="extra17.jpg" alt="Memória extra 17">
+  <img src="extra18.jpg" alt="Memória extra 18">
+  <img src="extra19.jpg" alt="Memória extra 19">
+  <img src="extra20.jpg" alt="Memória extra 20">
+  <img src="extra21.jpg" alt="Memória extra 21">
+  <img src="extra22.jpg" alt="Memória extra 22">
+  <img src="extra23.jpg" alt="Memória extra 23">
+  <img src="extra24.jpg" alt="Memória extra 24">
+  <img src="extra25.jpg" alt="Memória extra 25">
+</div>
+
+
   <button class="next" onclick="showFinal()">Agora sim, a surpresa 💝</button>
 </div>
 
@@ -337,6 +363,52 @@ Esperamos que se divirta e relembre cada risada, cada abraço e cada momento ine
   <h2 id="finalTitle"></h2>
   <p id="finalText"></p>
 </div>
+
+<style>
+  /* Ajuste do carrossel maior */
+  .carousel {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-top:15px;
+  position:relative;
+  width:100%;
+  max-width:420px;
+  height:380px;
+  overflow:hidden;
+}
+
+.carousel img {
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:20px;
+  box-shadow:0 8px 22px rgba(0,0,0,0.25);
+  opacity:0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+/* imagem ativa */
+.carousel img.active {
+  opacity:1;
+}
+
+  
+</style>
+
+<script>
+function showFinal(){
+  cards[current].classList.remove("active");
+  document.getElementById("specialMessage").style.display="block";
+
+  const title="Eu te amo para sempre ❤️";
+  const text="Obrigado por ser minha melhor lembrança todos os dias. Você é a razão dos meus sorrisos, a luz nos meus dias e a certeza de que o amor verdadeiro existe ✨💖";
+  
+  typeWriter("finalTitle",title,50,()=>{typeWriter("finalText",text,40);});
+}
+</script>
+
 
 <audio id="bg-music" loop>
   <source src="musica.mp3.mp3" type="audio/mpeg">
@@ -392,7 +464,7 @@ function showComment(memoryIndex, option){
     commentsDiv.innerHTML='<div class="comment neto">💙 Neto: Se não for nenhum desses nomes, a culpa é da Jhully</div><div class="comment jhully">💖 Jhully: kkkkkkk vou assumir</div>';
   }
   if(memoryIndex===10 && option==='A'){
-    commentsDiv.innerHTML='<div class="comment neto">💙 Neto: Falei, parecia mesmo</div><div class="comment jhully">💖 Jhully:</div>';
+    commentsDiv.innerHTML='<div class="comment neto">💙 Neto: Falei trouxa </div><div class="comment jhully">💖 Jhully:</div>';
   }
   if(memoryIndex===10 && option==='B'){
     commentsDiv.innerHTML='<div class="comment neto">💙 Neto:k</div><div class="comment jhully">💖 Jhully:EU FALEIII PRA TI</div>';
@@ -430,13 +502,18 @@ setInterval(createHeart,500);
 // Carrossel
 let slideIndex=0;
 const images=["extra1.jpg","extra2.jpg","extra3.jpg","extra4.jpg","extra5.jpg","extra6.jpg","extra7.jpg","extra8.jpg","extra9.jpg","extra10.jpg","extra11.jpg","extra12.jpg","extra12.jpg","extra14.jpg","extra15.jpg"];
-const carouselImage=document.getElementById("carouselImage");
+// Carrossel crossfade
+const carouselImgs = document.querySelectorAll(".carousel img");
+let currentSlide = 0;
+
 function showSlide(){
-  carouselImage.classList.remove("fade");
-  setTimeout(()=>{ carouselImage.src=images[slideIndex]; carouselImage.classList.add("fade"); },200);
-  slideIndex=(slideIndex+1)%images.length;
+  carouselImgs[currentSlide].classList.remove("active");
+  currentSlide = (currentSlide + 1) % carouselImgs.length;
+  carouselImgs[currentSlide].classList.add("active");
 }
-setInterval(showSlide,2500);
+
+setInterval(showSlide, 3000); // troca a cada 3s
+
 </script>
 
 </body>
